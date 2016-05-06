@@ -9,13 +9,18 @@
 \usepackage[paperwidth=210mm, paperheight=210mm,includefoot]{geometry} % Геометрия
 \geometry{margin=2cm}
 
-\makeatletter                                                                % Костыль для кириллицы в input
+\makeatletter  % Костыль для кириллицы в input
     \let\old@input\input
     \renewcommand\input[1]{%
         \expandafter\old@input{"\detokenize{#1}"}%
     }
 \makeatother
 
+\makeatletter
+\def\input@path{{texts/}}
+\makeatother
+
+\newcommand{\inputText}{\input {texts/}}
 
 \usepackage{graphicx} % Картинки
 \graphicspath{{pictures/}}
@@ -64,7 +69,7 @@
 
 \epigraph{Робот, которому грустно, и Викинги}
 
-\input{texts/Викинги.txt}
+\input{Викинги.txt}
 
 
 \chapter{004. Создатель}
