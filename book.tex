@@ -1,4 +1,25 @@
-\documentclass[17pt]{extbook} % 14, 17, 20
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SadRobo Comicbook
+% Version 0.1 (08/05/16)
+%
+% This template has been downloaded from:
+% https://github.com/Himura2la/SadRobo
+%
+% Original author:
+% SadBobo Team
+%
+% License:
+% SadRobo License (А если серьёзно, какая у нас лицензия?)
+%
+% Важные замечания:
+% Роботу всё ещё грустно.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{memoir} % 14, 17, 20
+
+%-------------------------------------------------------------------------
+%            	Подключаемые пакеты
+%-------------------------------------------------------------------------
 \usepackage{cmap} % Для кодировки PDF
 \usepackage[utf8]{inputenc} % Кодировка входа
 \usepackage[encoding,filenameencoding=utf8]{grffile} %Нормально читаем кодировку файловой системы
@@ -6,51 +27,87 @@
 \usepackage[russian]{babel} % Локаль
 \usepackage{pscyr} % Крутые русские шрифты (http://scon155.phys.msu.su/~swan/cyrtug2000.pdf)
 \usepackage[babel=true]{microtype} % Точный подгон текста
-\usepackage[paperwidth=210mm, paperheight=210mm,includefoot]{geometry} % Геометрия
-\geometry{margin=2cm}
+\usepackage{graphicx} % Картинки
+\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false]{hyperref} % Мета-информация для pdf
 
-\makeatletter  % Костыль для кириллицы в input
+
+%-------------------------------------------------------------------------
+%           	Костыль для кириллицы в input
+%-------------------------------------------------------------------------
+\makeatletter  
     \let\old@input\input
-    \renewcommand\input[1]{%
-        \expandafter\old@input{"\detokenize{#1}"}%
+    \renewcommand\input[1]{
+        \expandafter\old@input{"\detokenize{#1}"}
     }
 \makeatother
 
+
+%----------------------------------------------------------------------
+%               	Пути к файлам
+%----------------------------------------------------------------------
 \makeatletter
-\def\input@path{{texts/}}
+	\def\input@path{{texts/}}                  % К текстовым файлам (для input)
 \makeatother
 
-\usepackage{graphicx} % Картинки
-\graphicspath{{pictures/}}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-
-\frenchspacing % Одинарный пробел в конце предложений
-\renewcommand{\familydefault}{far} % Шрифт (tex\latex\pscyr\pscyr.sty)
+\graphicspath{{pictures/}}                       % К картинкам
+\DeclareGraphicsExtensions{.png,.jpg}   % Расширения для используемых картинок
 
 
-\usepackage{fancyhdr} % Колонтитулы
-\pagestyle{fancy}
-\fancyhf{} 			% Очистить
-\cfoot{\thepage}	% Добавить номер
-\renewcommand{\headrulewidth}{0pt} % Без линии
-\fancypagestyle{plain}{ % Для страниц с заголовками раздела chapter
-	\fancyhf{}
-	\cfoot{\thepage}	% Добавить номер
-}
+%----------------------------------------------------------------------------------------
+%		Страницы, отступы, размеры шапки и потолка
+%----------------------------------------------------------------------------------------
+\setstocksize{22cm}{22cm} % Размер страницы, взял квадрат на данный момент
+\settrimmedsize{\stockheight}{\stockwidth}{*} % No trims !!! Хз как работает
+\setlrmarginsandblock{18pt}{18pt}{*} % Отступ слева/спава
+\setulmarginsandblock{30pt}{36pt}{*} % Отступ сверху/снизу
+\setheadfoot{10pt}{8pt} % Высота шапки и подвала
+\setheaderspaces{*}{2pt}{*} %Пространство между шапкой и блоком текста
 
 
+%----------------------------------------------------------------------------------------
+%		Шапка и подвал
+%----------------------------------------------------------------------------------------
+\makepagestyle{mio} % Новый стиль страницы
+\setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
+\makeheadrule{mio}{\textwidth}{0.1mm} % Header rule height
+\makeoddhead{mio}{\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}}{}{} % Спецификация шапки
+\makeoddfoot{mio}{}{\scriptsize {\thepage \quad \vrule \quad \thelastpage}}{} % Спецификация подвала
+\makeoddfoot{plain}{}{\footnotesize {\thepage \quad \vrule \quad \thelastpage}}{} %Нумерация страниц
+\pagestyle{mio} % Используем созданный нами стиль
 
-\usepackage[explicit]{titlesec}  % Заголовки
-\titleformat{\chapter}[drop]{}{}{0pt}{}
-\titlespacing*{\chapter}{0pt}{-20pt}{0pt}
 
-\titleformat{\part}{}{}{0pt}{}
-\titlespacing*{\part}{0pt}{0pt}{0pt}
+%----------------------------------------------------------------------------------------------------------
+%		Оформление названия главы (имени диалогов). Получилась сложная мотыга, чтобы убрать слово "Глава". Наверняка есть способ лучше, через нормальный
+%       \makechapterstyle
+%----------------------------------------------------------------------------------------------------------
+\makeatletter
+	\renewcommand{\@makechapterhead}[1]{\vspace*{20 pt}{                    %Отступ перед названием 
+		\centering\setlength{\parindent}{0pt}  \normalfont
+		\bfseries\huge                                                               		%Собственно, размер шрифта (huge)
+		\ifnum \value{secnumdepth}>1 
+  		 \if@mainmatter\thechapter.\ \fi%
+		\fi
+		#1\par\nobreak\vspace{30 pt}}}                                 		%Отступ после названия
+\makeatother
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
-\newcommand\X{\par\noindent---~}
 
+%----------------------------------------------------------------------------------------
+%		Разное и спецификации документа
+%----------------------------------------------------------------------------------------
+\setlength{\parindent}{1em} % Paragraph indentation
+
+\midsloppy % Перенос строк, что-то между \fussy и \sloppy
+
+\checkandfixthelayout % Tell memoir to implement the above
+
+\renewcommand{\familydefault}{far} % Шрифт (tex\latex\pscyr\pscyr.sty)   % Подключаем чудо-шрифты из pscyr
+
+\newcommand\X{\par\noindent---~}  % Макрос для форматирования диалогов
+
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%		Макрос максимальной ширины
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \makeatletter %Максимальная ширина
 \def \maxwidth{
 	\ifdim\Gin@nat@width>\linewidth
@@ -61,32 +118,29 @@
 \makeatother
 
 
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%		Макрос для диалога, первый параметр имя файлов (можно на 2 разделить, если очень хочется), второй - описание картинки
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\usepackage{epigraph}
-
-%\MyTempl[parvalue1,parvalue2]{templatename}
-%\newcommand{\newDialog|par1|par2}}{\par}
-
-\newcommand{\newdialog}[2]{ %Макрос для диалога, первый параметр имя файлов (можно на 2 разделить, если очень хочется), второй - описание картинки
-\input{#1}
-\begin{figure}[p!]
-\center{\includegraphics[height = 140mm, width = \maxwidth, keepaspectratio]{#1}}
-\center{#2}
-\label{fig:image}
-\end{figure}
+\newcommand{\newdialog}[2]{
+	\chapter{Робот, которому грустно, и #1}
+	\input{#1}
+	\begin{figure}[p!]
+		\center{\includegraphics[height = 18cm, width = \maxwidth, keepaspectratio]{#1}}
+		\center{#2}
+		\label{fig:image}
+	\end{figure}
 }
+
+
+%-------------------------------------------------------------------------------------------------------------------
+%              	Тело документа
+%-------------------------------------------------------------------------------------------------------------------
 
 \begin{document} %-----------------------------------------------------
 
-\chapter{002. Викинги}
-\epigraph{Робот, которому грустно, и Викинги}
-
 \newdialog{Викинги}{Борода лучше своего отсутствия}
-
-
-\chapter{004. Создатель}
-\epigraph{Робот, которому грустно, и Создатель}
-
 \newdialog{Создатель}{Все мы что-то создаём}
+\newdialog{Паук}{Тащемта, например}
 
 \end{document}
