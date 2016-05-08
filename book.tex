@@ -20,8 +20,6 @@
 \def\input@path{{texts/}}
 \makeatother
 
-\newcommand{\inputText}{\input {texts/}}
-
 \usepackage{graphicx} % Картинки
 \graphicspath{{pictures/}}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
@@ -49,40 +47,46 @@
 \titleformat{\part}{}{}{0pt}{}
 \titlespacing*{\part}{0pt}{0pt}{0pt}
 
-
-
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \newcommand\X{\par\noindent---~}
 
+\makeatletter %Максимальная ширина
+\def \maxwidth{
+	\ifdim\Gin@nat@width>\linewidth
+		\linewidth
+	\else
+		\Gin@nat@width
+	\fi}
+\makeatother
+
+
+
 \usepackage{epigraph}
 
+%\MyTempl[parvalue1,parvalue2]{templatename}
+%\newcommand{\newDialog|par1|par2}}{\par}
+
+\newcommand{\newdialog}[2]{ %Макрос для диалога, первый параметр имя файлов (можно на 2 разделить, если очень хочется), второй - описание картинки
+\input{#1}
+\begin{figure}[p!]
+\center{\includegraphics[height = 140mm, width = \maxwidth, keepaspectratio]{#1}}
+\center{#2}
+\label{fig:image}
+\end{figure}
+}
 
 \begin{document} %-----------------------------------------------------
 
 \chapter{002. Викинги}
-
-\begin{figure}[p!]
-\center{\includegraphics[scale=0.5]{Викинги}}
-\center{Борода лучше её отсутствия}
-\label{fig:image}
-\end{figure}
-
 \epigraph{Робот, которому грустно, и Викинги}
 
-\input{Викинги}
+\newdialog{Викинги}{Борода лучше своего отсутствия}
 
 
 \chapter{004. Создатель}
-
-\begin{figure}[p!]
-\center{\includegraphics[scale=1.5]{Создатель}}
-\center{Все мы порой что-то создаём}
-\label{fig:image}
-\end{figure}
-
 \epigraph{Робот, которому грустно, и Создатель}
 
-\input{Создатель}
+\newdialog{Создатель}{Все мы что-то создаём}
 
 \end{document}
