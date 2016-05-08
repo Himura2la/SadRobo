@@ -10,12 +10,14 @@
 %
 % License:
 % SadRobo License (А если серьёзно, какая у нас лицензия?)
+% 			     (Кто разбирается в лицензиях? Я~--- нет.)
+%           (И кажется у гитхаба есть ограничения с этим.)
 %
 % Важные замечания:
 % Роботу всё ещё грустно.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[11pt]{memoir} % 14, 17, 20
+\documentclass[14pt]{memoir} % 14, 17, 20
 
 %-------------------------------------------------------------------------
 %            	Подключаемые пакеты
@@ -46,10 +48,10 @@
 %               	Пути к файлам
 %----------------------------------------------------------------------
 \makeatletter
-	\def\input@path{{texts/}}                  % К текстовым файлам (для input)
+	\def\input@path{{texts/}}           % К текстовым файлам (для input)
 \makeatother
 
-\graphicspath{{pictures/}}                       % К картинкам
+\graphicspath{{pictures/}}              % К картинкам
 \DeclareGraphicsExtensions{.png,.jpg}   % Расширения для используемых картинок
 
 
@@ -69,7 +71,7 @@
 %----------------------------------------------------------------------------------------
 \makepagestyle{mio} % Новый стиль страницы
 \setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
-\makeheadrule{mio}{\textwidth}{0.1mm} % Header rule height
+\makeheadrule{mio}{\textwidth}{0mm} % Header rule NO
 \makeoddhead{mio}{\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}}{}{} % Спецификация шапки
 \makeoddfoot{mio}{}{\scriptsize {\thepage \quad \vrule \quad \thelastpage}}{} % Спецификация подвала
 \makeoddfoot{plain}{}{\footnotesize {\thepage \quad \vrule \quad \thelastpage}}{} %Нумерация страниц
@@ -94,7 +96,7 @@
 %----------------------------------------------------------------------------------------
 %		Разное и спецификации документа
 %----------------------------------------------------------------------------------------
-\setlength{\parindent}{1em} % Paragraph indentation
+\setlength{\parindent}{0pt} % No paragraph indentation!
 
 \midsloppy % Перенос строк, что-то между \fussy и \sloppy
 
@@ -104,11 +106,18 @@
 
 \newcommand\X{\par\noindent---~}  % Макрос для форматирования диалогов
 
+\newenvironment{dialog}
+{  }
+{  }
+
+\newenvironment{monolog}
+{ \begin{quote}\itshape }
+{ \end{quote} }
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-%		Макрос максимальной ширины
+%		Макрос максимальной ширины -- ЭТО ЧТО ВООБЩЕ???
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\makeatletter %Максимальная ширина
+\makeatletter %Максимальная ширина (сверх-информативный коммент)
 \def \maxwidth{
 	\ifdim\Gin@nat@width>\linewidth
 		\linewidth
