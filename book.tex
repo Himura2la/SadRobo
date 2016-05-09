@@ -69,28 +69,29 @@
 %----------------------------------------------------------------------------------------
 %		Шапка и подвал
 %----------------------------------------------------------------------------------------
-\makepagestyle{mio} % Новый стиль страницы
+\makepagestyle{RoboPage} % Новый стиль страницы
 \setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
-\makeheadrule{mio}{\textwidth}{0mm} % Header rule NO
-\makeoddhead{mio}{\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}}{}{} % Спецификация шапки
-\makeoddfoot{mio}{}{\scriptsize {\thepage \quad \vrule \quad \thelastpage}}{} % Спецификация подвала
+\makeheadrule{RoboPage}{\textwidth}{0mm} % Header rule NO
+\makeoddhead{RoboPage}{\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}}{}{} % Спецификация шапки
+\makeoddfoot{RoboPage}{}{\scriptsize {\thepage \quad \vrule \quad \thelastpage}}{} % Спецификация подвала
 \makeoddfoot{plain}{}{\footnotesize {\thepage \quad \vrule \quad \thelastpage}}{} %Нумерация страниц
-\pagestyle{mio} % Используем созданный нами стиль
+\pagestyle{RoboPage} % Используем созданный нами стиль
 
 
-%----------------------------------------------------------------------------------------------------------
-%		Оформление названия главы (имени диалогов). Получилась сложная мотыга, чтобы убрать слово "Глава". Наверняка есть способ лучше, через нормальный
-%       \makechapterstyle
-%----------------------------------------------------------------------------------------------------------
-\makeatletter
-	\renewcommand{\@makechapterhead}[1]{\vspace*{20 pt}{                    %Отступ перед названием 
-		\centering\setlength{\parindent}{0pt}  \normalfont
-		\bfseries\huge                                                               		%Собственно, размер шрифта (huge)
-		\ifnum \value{secnumdepth}>1 
-  		 \if@mainmatter\thechapter.\ \fi%
-		\fi
-		#1\par\nobreak\vspace{30 pt}}}                                 		%Отступ после названия
-\makeatother
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+
+\makechapterstyle{RoboChapter}{ % Определяем новый стиль
+\renewcommand{\chapterheadstart}{} % Пробел перед началом главы
+\renewcommand{\printchaptername}{} % Спецификация слова "Глава"
+\renewcommand{\printchapternum}{} % Спецификация номера главы
+\renewcommand{\afterchapternum}{} % Пробел между номером главы и текстом
+\renewcommand{\printchaptertitle}[1]{ % Спецификация названия главы
+\centering \itshape\Huge{##1}}
+\renewcommand{\afterchaptertitle}{
+\vskip2.5\onelineskip        %Отступ после названия главы
+}}
+\chapterstyle{RoboChapter} % Используем новый стиль
 
 
 %----------------------------------------------------------------------------------------
@@ -152,5 +153,8 @@
 \newdialog{Создатель}{Все мы что-то создаём}
 \newdialog{Паук}{Тащемта, например}
 \newdialog{Ницше}{Сверхчеловек не нашего времени}
+
+\chapter{Rupunzel}
+
 
 \end{document}
