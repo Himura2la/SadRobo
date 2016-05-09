@@ -85,23 +85,18 @@
 
 
 
-% Переписываем оформление названия главы
-\makeatletter
-	\renewcommand{\@makechapterhead}[1]{
-		%\vspace*{20 pt}  %Отступ перед названием (регулируется общими отступами)
-		{\centering\normalfont\bfseries
-			\huge 	  %Размер шрифта (huge)
-			%\setlength{\parindent}{0pt} % и так ноль
-			
-			%\ifnum \value{secnumdepth}>1 
-	  		% \if@mainmatter\thechapter.\ \fi % а нафига?
-			%\fi
-			
-			#1 %\par\nobreak
-			\vspace{20 pt} % Отступ после названия
-		}
-	}	
-\makeatother
+% Оформление названия главы
+\makechapterstyle{RoboChapter}{ % Определяем новый стиль
+	\renewcommand{\chapterheadstart}{} % Пробел перед началом главы
+	\renewcommand{\printchaptername}{} % Спецификация слова "Глава"
+	\renewcommand{\printchapternum}{} % Спецификация номера главы
+	\renewcommand{\afterchapternum}{} % Пробел между номером главы и текстом
+	\renewcommand{\printchaptertitle}[1]{ % Спецификация названия главы
+	\centering \itshape\Huge{##1}}
+	\renewcommand{\afterchaptertitle}{
+		\vskip0.5\onelineskip        %Отступ после названия главы
+	}}
+\chapterstyle{RoboChapter} % Используем новый стиль
 
 
 %----------------------------------------------------------------------------------------
@@ -145,7 +140,7 @@
 \newcommand{\newdialog}[2]{
 	\chapter{Робот, которому грустно, и #1}
 	\input{#1}
-	\begin{figure}[p]
+	\begin{figure}[p!]
 		\center{\includegraphics[height = 16cm, width = \maxwidth, keepaspectratio]{#1}}
 		\center{#2}
 		%\label{pic:#1}
