@@ -19,9 +19,6 @@
 
 \documentclass[17pt]{memoir} % 14, 17, 20
 
-%-------------------------------------------------------------------------
-%            	Подключаемые пакеты
-%-------------------------------------------------------------------------
 \usepackage{cmap} % Для кодировки PDF
 \usepackage[utf8]{inputenc} % Кодировка входа
 \usepackage[encoding,filenameencoding=utf8]{grffile} %Нормально читаем кодировку файловой системы
@@ -33,9 +30,7 @@
 \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false]{hyperref} % Мета-информация для pdf
 
 
-%-------------------------------------------------------------------------
-%           	Костыль для кириллицы в input
-%-------------------------------------------------------------------------
+% Костыль для кириллицы в input
 \makeatletter  
     \let\old@input\input
     \renewcommand\input[1]{
@@ -44,9 +39,7 @@
 \makeatother
 
 
-%----------------------------------------------------------------------
-%               	Пути к файлам
-%----------------------------------------------------------------------
+% Пути к файлам
 \makeatletter
 	\def\input@path{{texts/}}           % К текстовым файлам (для input)
 \makeatother
@@ -55,41 +48,59 @@
 \DeclareGraphicsExtensions{.png,.jpg}   % Расширения для используемых картинок
 
 
-%----------------------------------------------------------------------------------------
-%		Страницы, отступы, размеры шапки и потолка
-%----------------------------------------------------------------------------------------
-\setstocksize{210mm}{210mm} % Размер страницы, взял квадрат на данный момент
-\settrimmedsize{\stockheight}{\stockwidth}{*} % No trims !!! Хз как работает
-\setlrmarginsandblock{2cm}{2cm}{*} % Отступ слева/спава (margins)
-\setulmarginsandblock{1cm}{2cm}{*} % Отступ сверху/снизу
-\setheadfoot{0cm}{8pt} % Высота шапки и подвала
-\setheaderspaces{*}{0cm}{*} %Пространство между шапкой и блоком текста
+% ------- Геометрия -------
 
+\setstocksize{210mm}{210mm} % Размер исходников
+\settrimmedsize{200mm}{195mm}{*} % Размер обрезанной страницы 
+\settrims{5mm}{10mm} 			 % Размер обреза сверху/изнутри
+\setlrmarginsandblock{5mm}{5mm}{*} % Отступ слева/справа
+\setulmarginsandblock{5mm}{10mm}{*} % Отступ сверху/снизу
+\setheadfoot{0pt}{1.5em} % Высота шапки и подвала
+\setheaderspaces{*}{0pt}{*} %Пространство между шапкой и блоком текста
+\setmarginnotes{0pt}{0pt}{0pt} % Ликвидация области заметок
 
-%----------------------------------------------------------------------------------------
-%		Шапка и подвал
-%----------------------------------------------------------------------------------------
-\makepagestyle{mio} % Новый стиль страницы
+%\usepackage{showframe} % Любые манипуляции с полями проводить с этим пакетом
+
+% ------- Колонтитулы -------
+
 \setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
-\makeheadrule{mio}{\textwidth}{0mm} % Header rule NO
-\makeoddhead{mio}{\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}}{}{} % Спецификация шапки
-\makeoddfoot{mio}{}{\scriptsize {\thepage \quad \vrule \quad \thelastpage}}{} % Спецификация подвала
-\makeoddfoot{plain}{}{\footnotesize {\thepage \quad \vrule \quad \thelastpage}}{} %Нумерация страниц
-\pagestyle{mio} % Используем созданный нами стиль
+\makeheadrule{plain}{0pt}{0pt} % No header line
+
+\makeoddhead{plain}{
+	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
+}{}{} % Спецификация нечетной шапки (текст)
+\makeevenhead{plain}{
+	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
+}{}{} % Спецификация четной шапки (пикча)
+
+\makeoddfoot{plain}{}{
+	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
+}{} % Спецификация нечетного подвала (текст)
+\makeevenfoot{plain}{}{
+	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
+}{} % Спецификация четного подвала (пикча)
+\pagestyle{plain}
 
 
-%----------------------------------------------------------------------------------------------------------
-%		Оформление названия главы (имени диалогов). Получилась сложная мотыга, чтобы убрать слово "Глава". Наверняка есть способ лучше, через нормальный
-%       \makechapterstyle
-%----------------------------------------------------------------------------------------------------------
+
+
+
+% Переписываем оформление названия главы
 \makeatletter
-	\renewcommand{\@makechapterhead}[1]{\vspace*{20 pt}{                    %Отступ перед названием 
-		\centering\setlength{\parindent}{0pt}  \normalfont
-		\bfseries\huge                                                               		%Собственно, размер шрифта (huge)
-		\ifnum \value{secnumdepth}>1 
-  		 \if@mainmatter\thechapter.\ \fi%
-		\fi
-		#1\par\nobreak\vspace{30 pt}}}                                 		%Отступ после названия
+	\renewcommand{\@makechapterhead}[1]{
+		%\vspace*{20 pt}  %Отступ перед названием (регулируется общими отступами)
+		{\centering\normalfont\bfseries
+			\huge 	  %Размер шрифта (huge)
+			%\setlength{\parindent}{0pt} % и так ноль
+			
+			%\ifnum \value{secnumdepth}>1 
+	  		% \if@mainmatter\thechapter.\ \fi % а нафига?
+			%\fi
+			
+			#1 %\par\nobreak
+			\vspace{20 pt} % Отступ после названия
+		}
+	}	
 \makeatother
 
 
@@ -100,19 +111,20 @@
 
 \midsloppy % Перенос строк, что-то между \fussy и \sloppy
 
-\checkandfixthelayout % Tell memoir to implement the above
+\checkandfixthelayout % just do it, memoir
 
 \renewcommand{\familydefault}{far} % Шрифт (tex\latex\pscyr\pscyr.sty)   % Подключаем чудо-шрифты из pscyr
 
-\newcommand\X{\par\noindent---~}  % Макрос для форматирования диалогов
+\newcommand\R{\par\noindent---~}  % Маркер робота
+\newcommand\X{\par\noindent---~}  % Маркер собеседника
 
-\newenvironment{dialog}
-{  }
-{  }
+\newenvironment{dialog} % Пространство диалога
+{  } % Выполняется в начале
+{  } % Выполняется в конце
 
-\newenvironment{monolog}
-{ \begin{quote}\itshape }
-{ \end{quote} }
+\newenvironment{monolog} % Пространство размышлений
+{ \begin{quote}\itshape } % Выполняется в начале
+{ \end{quote} } % Выполняется в конце
 
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %		Считаем оптимальную ширину картинки
@@ -126,7 +138,6 @@
 	\fi}
 \makeatother
 
-
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %		Макрос для диалога, первый параметр имя файлов (можно на 2 разделить, если очень хочется), второй - описание картинки
 %-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +148,7 @@
 	\begin{figure}[p!]
 		\center{\includegraphics[height = 18cm, width = \maxwidth, keepaspectratio]{#1}}
 		\center{#2}
-		\label{fig:image}
+		%\label{pic:#1}
 	\end{figure}
 }
 
@@ -147,6 +158,7 @@
 %-------------------------------------------------------------------------------------------------------------------
 
 \begin{document} %-----------------------------------------------------
+
 
 \newdialog{Викинги}{Борода лучше своего отсутствия}
 \newdialog{Создатель}{Все мы что-то создаём}
