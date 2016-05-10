@@ -1,81 +1,85 @@
-% ------- РџР°РєРµС‚С‹ -------
+% !TeX root = book.tex
 
-\usepackage{cmap} % Р”Р»СЏ РєРѕРґРёСЂРѕРІРєРё PDF
-\usepackage[utf8]{inputenc} % РљРѕРґРёСЂРѕРІРєР° РІС…РѕРґР°
-\usepackage[encoding,filenameencoding=utf8]{grffile} %РќРѕСЂРјР°Р»СЊРЅРѕ С‡РёС‚Р°РµРј РєРѕРґРёСЂРѕРІРєСѓ С„Р°Р№Р»РѕРІРѕР№ СЃРёСЃС‚РµРјС‹
-\usepackage[T2A]{fontenc} % РљРѕРґРёСЂРѕРІРєР° РІС‹С…РѕРґР°
-\usepackage[russian]{babel} % Р›РѕРєР°Р»СЊ
-\usepackage{pscyr} % РљСЂСѓС‚С‹Рµ СЂСѓСЃСЃРєРёРµ С€СЂРёС„С‚С‹ (http://scon155.phys.msu.su/~swan/cyrtug2000.pdf)
-\usepackage[babel=true]{microtype} % РўРѕС‡РЅС‹Р№ РїРѕРґРіРѕРЅ С‚РµРєСЃС‚Р°
-\usepackage{graphicx} % РљР°СЂС‚РёРЅРєРё
-\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false]{hyperref} % РњРµС‚Р°-РёРЅС„РѕСЂРјР°С†РёСЏ РґР»СЏ pdf
+% ------- Пакеты -------
+
+\usepackage{cmap} % Для кодировки PDF
+\usepackage[utf8]{inputenc} % Кодировка входа
+\usepackage[encoding,filenameencoding=utf8]{grffile} %Нормально читаем кодировку файловой системы
+\usepackage[T2A]{fontenc} % Кодировка выхода
+\usepackage[russian]{babel} % Локаль
+\usepackage{pscyr} % Крутые русские шрифты (http://scon155.phys.msu.su/~swan/cyrtug2000.pdf)
+\usepackage[babel=true]{microtype} % Точный подгон текста
+\usepackage{graphicx} % Картинки
+\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=false]{hyperref} % Мета-информация для pdf
 
 
-% ------- РџСѓС‚Рё Рє С„Р°Р№Р»Р°Рј -------
+% ------- Пути к файлам -------
 
 \makeatletter
-	\def\input@path{{texts/}}           % Рљ С‚РµРєСЃС‚РѕРІС‹Рј С„Р°Р№Р»Р°Рј (РґР»СЏ input)
+	\def\input@path{{texts/}}           % К текстовым файлам (для input)
 \makeatother
 
-\graphicspath{{pictures/}}              % Рљ РєР°СЂС‚РёРЅРєР°Рј
-\DeclareGraphicsExtensions{.png,.jpg}   % Р Р°СЃС€РёСЂРµРЅРёСЏ РґР»СЏ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РєР°СЂС‚РёРЅРѕРє
+\graphicspath{{pictures/}}              % К картинкам
+\DeclareGraphicsExtensions{.png,.jpg}   % Расширения для используемых картинок
 
-% ------- Р“РµРѕРјРµС‚СЂРёСЏ -------
+% ------- Геометрия -------
 
-\setstocksize{210mm}{210mm} % Р Р°Р·РјРµСЂ РёСЃС…РѕРґРЅРёРєРѕРІ
-\settrimmedsize{200mm}{195mm}{*} % Р Р°Р·РјРµСЂ РѕР±СЂРµР·Р°РЅРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ 
-\settrims{5mm}{10mm} 			 % Р Р°Р·РјРµСЂ РѕР±СЂРµР·Р° СЃРІРµСЂС…Сѓ/РёР·РЅСѓС‚СЂРё
-\setlrmarginsandblock{10mm}{10mm}{*} % РћС‚СЃС‚СѓРї СЃР»РµРІР°/СЃРїСЂР°РІР°
-\setulmarginsandblock{10mm}{15mm}{*} % РћС‚СЃС‚СѓРї СЃРІРµСЂС…Сѓ/СЃРЅРёР·Сѓ
-\setheadfoot{0pt}{1.5em} % Р’С‹СЃРѕС‚Р° С€Р°РїРєРё Рё РїРѕРґРІР°Р»Р°
-\setheaderspaces{*}{0pt}{*} %РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РјРµР¶РґСѓ С€Р°РїРєРѕР№ Рё Р±Р»РѕРєРѕРј С‚РµРєСЃС‚Р°
-\setmarginnotes{0pt}{0pt}{0pt} % Р›РёРєРІРёРґР°С†РёСЏ РѕР±Р»Р°СЃС‚Рё Р·Р°РјРµС‚РѕРє
+\setstocksize{297mm}{210mm} % Размер исходников
+\settrimmedsize{200mm}{185mm}{*} % Размер обрезанной страницы 
+\settrims{5mm}{2cm} 			 % Размер обреза сверху/изнутри
+% Max 10:43 am
+% с 3 сторон по 5 мм с крепления 2 см
+\setlrmarginsandblock{10mm}{10mm}{*} % Отступ слева/справа
+\setulmarginsandblock{10mm}{15mm}{*} % Отступ сверху/снизу
+\setheadfoot{0pt}{1.5em} % Высота шапки и подвала
+\setheaderspaces{*}{0pt}{*} % Пространство между шапкой и блоком текста
+\setmarginnotes{0pt}{0pt}{0pt} % Ликвидация области заметок
 
-%\usepackage{showframe} % Р›СЋР±С‹Рµ РјР°РЅРёРїСѓР»СЏС†РёРё СЃ РїРѕР»СЏРјРё РїСЂРѕРІРѕРґРёС‚СЊ СЃ СЌС‚РёРј РїР°РєРµС‚РѕРј
+%\usepackage{showframe} % Любые манипуляции с полями проводить с этим пакетом
 
 
-% ------- РљРѕР»РѕРЅС‚РёС‚СѓР»С‹ -------
+% ------- Колонтитулы -------
 
-\setlength{\headwidth}{\textwidth} % РЁРёСЂРёРЅР° С€Р°РїРєРё, РєР°Рє Рё Сѓ С‚РµРєСЃС‚Р°
+\setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
 \makeheadrule{plain}{0pt}{0pt} % No header line
-
 \makeoddhead{plain}{
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
-}{}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ РЅРµС‡РµС‚РЅРѕР№ С€Р°РїРєРё (С‚РµРєСЃС‚)
+}{}{} % Спецификация нечетной шапки (текст)
 \makeevenhead{plain}{
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
-}{}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ С‡РµС‚РЅРѕР№ С€Р°РїРєРё (РїРёРєС‡Р°)
+}{}{} % Спецификация четной шапки (пикча)
 
+\newcommand\zf[1]{\ifnum #1 < 100 0\fi \ifnum #1 < 10 0\fi #1}
 
 \newcounter{dianum}
 \setcounter{dianum}{5}
 \makeoddfoot{plain}{}{
-	{\arabic{dianum}}
-}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ РЅРµС‡РµС‚РЅРѕРіРѕ РїРѕРґРІР°Р»Р° (С‚РµРєСЃС‚)
+	{\scriptsize \thepage \quad \vrule \quad \#\zf{\arabic{dianum}}}
+}{} % Спецификация нечетного подвала (текст)
 \makeevenfoot{plain}{}{
-	{\arabic{dianum}}
-}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ С‡РµС‚РЅРѕРіРѕ РїРѕРґРІР°Р»Р° (РїРёРєС‡Р°)
+
+}{} % Спецификация четного подвала (пикча)
 \pagestyle{plain}
 
 
-% ------- РћС„РѕСЂРјР»РµРЅРёРµ РЅР°Р·РІР°РЅРёСЏ РіР»Р°РІС‹ -------
+% ------- Оформление названия главы -------
 
-\makechapterstyle{RoboChapter}{ % РћРїСЂРµРґРµР»СЏРµРј РЅРѕРІС‹Р№ СЃС‚РёР»СЊ
-	\renewcommand{\chapterheadstart}{} % РџСЂРѕР±РµР» РїРµСЂРµРґ РЅР°С‡Р°Р»РѕРј РіР»Р°РІС‹
-	\renewcommand{\printchaptername}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ СЃР»РѕРІР° "Р“Р»Р°РІР°"
-	\renewcommand{\printchapternum}{} % РЎРїРµС†РёС„РёРєР°С†РёСЏ РЅРѕРјРµСЂР° РіР»Р°РІС‹
-	\renewcommand{\afterchapternum}{} % РџСЂРѕР±РµР» РјРµР¶РґСѓ РЅРѕРјРµСЂРѕРј РіР»Р°РІС‹ Рё С‚РµРєСЃС‚РѕРј
-	\renewcommand{\printchaptertitle}[1]{ % РЎРїРµС†РёС„РёРєР°С†РёСЏ РЅР°Р·РІР°РЅРёСЏ РіР»Р°РІС‹
+\makechapterstyle{RoboChapter}{ % Определяем новый стиль
+	\renewcommand{\chapterheadstart}{} % Пробел перед началом главы
+	\renewcommand{\printchaptername}{} % Спецификация слова "Глава"
+	\renewcommand{\printchapternum}{} % Спецификация номера главы
+	\renewcommand{\afterchapternum}{} % Пробел между номером главы и текстом
+	\renewcommand{\printchaptertitle}[1]{ % Спецификация названия главы
 	\centering \itshape\Huge{##1}}
 	\renewcommand{\afterchaptertitle}{
-		\vskip0.5\onelineskip        %РћС‚СЃС‚СѓРї РїРѕСЃР»Рµ РЅР°Р·РІР°РЅРёСЏ РіР»Р°РІС‹
+		\vskip0.5\onelineskip        %Отступ после названия главы
 	}}
-\chapterstyle{RoboChapter} % РСЃРїРѕР»СЊР·СѓРµРј РЅРѕРІС‹Р№ СЃС‚РёР»СЊ
+\chapterstyle{RoboChapter} % Используем новый стиль
 
 
-% ------- Р•С‰Рµ РЅРµРјРЅРѕРіРѕ РЅР°СЃС‚СЂРѕРµРє -------
+% ------- Еще немного настроек -------
 
 \setlength{\parindent}{0pt} % No paragraph indentation!
-\midsloppy % РџРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРє, С‡С‚Рѕ-С‚Рѕ РјРµР¶РґСѓ \fussy Рё \sloppy
+\midsloppy % Перенос строк, что-то между \fussy и \sloppy
 \checkandfixthelayout % just do it, memoir
-\renewcommand{\familydefault}{far} % РЁСЂРёС„С‚ (tex\latex\pscyr\pscyr.sty)   % РџРѕРґРєР»СЋС‡Р°РµРј С‡СѓРґРѕ-С€СЂРёС„С‚С‹ РёР· pscyr
+\renewcommand{\familydefault}{far} % Шрифт (tex\latex\pscyr\pscyr.sty)   % Подключаем чудо-шрифты из pscyr
