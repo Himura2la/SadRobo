@@ -40,21 +40,21 @@
 
 % ------- Колонтитулы -------
 
+\newcommand{\thedialogid}{-1}
+
 \setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
 \makeheadrule{plain}{0pt}{0pt} % No header line
-
 \makeoddhead{plain}{
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
 }{}{} % Спецификация нечетной шапки (текст)
 \makeevenhead{plain}{
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
 }{}{} % Спецификация четной шапки (пикча)
-
 \makeoddfoot{plain}{}{
-	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
+	{\scriptsize \thepage \quad \vrule \quad \#\thedialogid}
 }{} % Спецификация нечетного подвала (текст)
 \makeevenfoot{plain}{}{
-	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
+	{\scriptsize \thepage \quad \vrule \quad \#\thedialogid}
 }{} % Спецификация четного подвала (пикча)
 \pagestyle{plain}
 
