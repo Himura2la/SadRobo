@@ -1,5 +1,3 @@
-book.pdf
-
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -8,6 +6,7 @@ book.pdf
 *.fls
 *.out
 *.toc
+*.pdf
 
 ## Intermediate documents:
 *.dvi
@@ -187,3 +186,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+*.pdf
