@@ -32,6 +32,7 @@
 
 
 % ------- Считаем оптимальную ширину картинки  -------
+% ------- По какой-то причине Gin@nat@width возвращает не то (на Создателе), что нужно. разобраться.
 
 \makeatletter 
 \def \maxwidth{
@@ -56,23 +57,24 @@
 { \begin{quote}\itshape } % Выполняется в начале
 { \end{quote} } % Выполняется в конце
 
-\newcommand{\newdialog}[2]{
+\newcommand{\newdialog}[3]{
 	\chapter{Робот, которому грустно, и #1}
-	\input{#1}
-	\begin{figure}[p!]
-		\center{\includegraphics[height = 16cm, width = \maxwidth, keepaspectratio]{#1}}
-		\center{#2}
-		%\label{pic:#1}
-	\end{figure}
+		\input{#1}
+		\begin{figure}[p!]
+			\center{\includegraphics[height = 16cm, width = \linewidth, keepaspectratio]{#1}}
+			\center{#2}
+			%\label{pic:#1}
+		\end{figure}
+	\setcounter{dianum}{#3}
 }
 
 
 
 \begin{document} % --------------------------------
 
-\newdialog{Викинги}{Борода лучше своего отсутствия}
-\newdialog{Создатель}{Все мы что-то создаём}
-\newdialog{Паук}{Тащемта, например}
-\newdialog{Ницше}{Сверхчеловек не нашего времени}
+\newdialog{Викинги}{Борода лучше своего отсутствия}{1}
+\newdialog{Создатель}{Все мы что-то создаём}{2}
+\newdialog{Паук}{Тащемта, например}{3}
+\newdialog{Ницше}{Сверхчеловек не нашего времени}{4}
 
 \end{document}
