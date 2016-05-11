@@ -1,3 +1,5 @@
+% !TeX root = book.tex
+
 % ------- Пакеты -------
 
 \usepackage{cmap} % Для кодировки PDF
@@ -22,13 +24,15 @@
 
 % ------- Геометрия -------
 
-\setstocksize{210mm}{210mm} % Размер исходников
-\settrimmedsize{200mm}{195mm}{*} % Размер обрезанной страницы 
-\settrims{5mm}{10mm} 			 % Размер обреза сверху/изнутри
+\setstocksize{297mm}{210mm} % Размер исходников
+\settrimmedsize{200mm}{185mm}{*} % Размер обрезанной страницы 
+\settrims{5mm}{2cm} 			 % Размер обреза сверху/изнутри
+% Max 10:43 am
+% с 3 сторон по 5 мм с крепления 2 см
 \setlrmarginsandblock{10mm}{10mm}{*} % Отступ слева/справа
 \setulmarginsandblock{10mm}{15mm}{*} % Отступ сверху/снизу
 \setheadfoot{0pt}{1.5em} % Высота шапки и подвала
-\setheaderspaces{*}{0pt}{*} %Пространство между шапкой и блоком текста
+\setheaderspaces{*}{0pt}{*} % Пространство между шапкой и блоком текста
 \setmarginnotes{0pt}{0pt}{0pt} % Ликвидация области заметок
 
 %\usepackage{showframe} % Любые манипуляции с полями проводить с этим пакетом
@@ -38,7 +42,6 @@
 
 \setlength{\headwidth}{\textwidth} % Ширина шапки, как и у текста
 \makeheadrule{plain}{0pt}{0pt} % No header line
-
 \makeoddhead{plain}{
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
 }{}{} % Спецификация нечетной шапки (текст)
@@ -46,14 +49,15 @@
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
 }{}{} % Спецификация четной шапки (пикча)
 
+\newcommand\zf[1]{\ifnum #1 < 100 0\fi \ifnum #1 < 10 0\fi #1}
 
 \newcounter{dianum}
 \setcounter{dianum}{5}
 \makeoddfoot{plain}{}{
-	{\arabic{dianum}}
+	{\scriptsize \thepage \quad \vrule \quad \#\zf{\arabic{dianum}}}
 }{} % Спецификация нечетного подвала (текст)
 \makeevenfoot{plain}{}{
-	{\arabic{dianum}}
+
 }{} % Спецификация четного подвала (пикча)
 \pagestyle{plain}
 
