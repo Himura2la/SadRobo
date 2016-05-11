@@ -46,14 +46,11 @@
 	%\scriptsize{\theauthor\hskip.2cm\vrule\hskip.2cm\itshape{\thetitle}}
 }{}{} % Спецификация четной шапки (пикча)
 
-
-\newcounter{dianum}
-\setcounter{dianum}{5}
 \makeoddfoot{plain}{}{
-	{\arabic{dianum}}
+	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
 }{} % Спецификация нечетного подвала (текст)
 \makeevenfoot{plain}{}{
-	{\arabic{dianum}}
+	{\scriptsize \thepage \quad \vrule \quad \thelastpage}
 }{} % Спецификация четного подвала (пикча)
 \pagestyle{plain}
 
