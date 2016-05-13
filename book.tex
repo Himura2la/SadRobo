@@ -44,6 +44,9 @@
 \makeatother
 
 
+\newlength\imageheight
+\newlength\imagewidth
+
 % ------- Робо-макросы ------- 
 
 \newcommand\R{\par\noindent---~}  % Маркер робота
@@ -57,13 +60,15 @@
 { \begin{quote}\itshape } % Выполняется в начале
 { \end{quote} } % Выполняется в конце
 
-\newcommand{\newdialog}[4]{
+\newcommand{\newdialog}[3]{
 	\chapter{Робот, которому грустно, и #2}
 		\input{#2}
 		\begin{figure}[p!]
 			\centering
 			\includegraphics[height = 190mm, width = \linewidth, keepaspectratio]{#2}    %170 для того, чтобы вместилась надпись
-			\ifthenelse{#4 = 1}{\center #3}{}
+			\settoheight\imageheight{\includegraphics{#2}}
+			\settowidth\imagewidth{\includegraphics{#2}}
+			\ifthenelse{\imagewidth > \imageheight}{\center #3}{}
 		\end{figure}
 	\setcounter{dianum}{#1}
 }
@@ -72,11 +77,11 @@
 
 \begin{document} % --------------------------------
 
-\newdialog{002}{Викинги}{Борода лучше своего отсутствия}{0} %0 - вертикальная, 1 - горизонтальная.
-\newdialog{004}{Создатель}{Все мы что-то создаём}{1}
-\newdialog{014}{Паук}{Тащемта, например}{1}
-\newdialog{018}{Ницше}{Сверхчеловек не нашего времени}{1}
-\newdialog{029}{Все}{Это можно было бы назвать вечеринкой, если Вечер бы пришёл. Но пришёл только Все}{1}
-\newdialog{035}{Студенты}{Фанатичные адепты богини Халявы}{1}
+\newdialog{002}{Викинги}{Борода лучше своего отсутствия}
+\newdialog{004}{Создатель}{Все мы что-то создаём}
+\newdialog{014}{Паук}{Тащемта, например}
+\newdialog{018}{Ницше}{Сверхчеловек не нашего времени}
+\newdialog{029}{Все}{Это можно было бы назвать вечеринкой, если Вечер бы пришёл. Но пришёл только Все}
+\newdialog{035}{Студенты}{Фанатичные адепты богини Халявы}
 
 \end{document}
