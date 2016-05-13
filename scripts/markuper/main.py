@@ -6,11 +6,11 @@ dialogs_path = "..\\..\\dialogs"
 pictures_path = "..\\..\\pictures"
 texts_path = "..\\..\\texts"
 
-env_re_find = re.compile(r"((-.*\n)+)(\n*.*)\n*((-.*\n)+)")
+env_re_find = re.compile(r"(((^-|–).*\n)+)(\n*.*)\n*(((^-|–).*\n)+)", re.MULTILINE)
 env_re_replace = \
-    r"\\begin{dialog}\n\1\\end{dialog}\n\n\\begin{monolog}\3\n\\end{monolog}\n\n\\begin{dialog}\n\4\\end{dialog}"
+    r"\\begin{dialog}\n\1\\end{dialog}\n\n\\begin{monolog}\4\n\\end{monolog}\n\n\\begin{dialog}\n\5\\end{dialog}"
 
-rep_re_find = re.compile(r'(^-)(.*?\n)((^-)(.*?\n))?', re.MULTILINE)
+rep_re_find = re.compile(r'(^-|–)(.*?\n)((^-|–)(.*?\n))?', re.MULTILINE)
 rep_re_replace = r"\\X\2\\R\5"
 
 
@@ -25,13 +25,14 @@ def process_dialog():
     target_txt_path = os.path.join(texts_path, title + ".txt")
     target_pic_path = os.path.join(pictures_path, title + "." + pic_path.split(".")[-1].lower())
 
-    if False: # Beware errors
+    if True:  # Beware errors !!!
         with open(target_txt_path, "w") as target:
             target.write(text)
-        shutil.copy(pic_path, target_pic_path)
+        # shutil.copy(pic_path, target_pic_path)
     else:
         print("Copy " + pic_path + " --> " + target_pic_path)
         print("Write to " + target_txt_path + ":\n" + text + "\n" + "-"*80)
+    print("\\newdialog{%s}{%s}{Made in Python}{1}" % (number, title))
 
 
 
