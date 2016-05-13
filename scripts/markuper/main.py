@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 
 dialogs_path = "..\\..\\dialogs"
 pictures_path = "..\\..\\pictures"
@@ -20,7 +21,19 @@ def process_dialog():
     text = open(txt_path, encoding="utf-8").read() + "\n"
     text = re.sub(env_re_find, env_re_replace, text)
     text = re.sub(rep_re_find, rep_re_replace, text)
-    print(text + "\n------------\n")
+
+    target_txt_path = os.path.join(texts_path, title + ".txt")
+    target_pic_path = os.path.join(pictures_path, title + "." + pic_path.split(".")[-1].lower())
+
+    if False: # Beware errors
+        with open(target_txt_path, "w") as target:
+            target.write(text)
+        shutil.copy(pic_path, target_pic_path)
+    else:
+        print("Copy " + pic_path + " --> " + target_pic_path)
+        print("Write to " + target_txt_path + ":\n" + text + "\n" + "-"*80)
+
+
 
 existing_pics = {file.split(".")[0] for file in os.listdir(pictures_path)}
 existing_texts = {file.split(".")[0] for file in os.listdir(texts_path)}
