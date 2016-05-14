@@ -32,7 +32,7 @@
 
 
 % ------- Считаем оптимальную ширину картинки  -------
-% ------- По какой-то причине Gin@nat@width возвращает не то (на Создателе), что нужно. разобраться.
+% ------- По какой-то причине Gin@nat@width возвращает размер не пикселах
 
 \makeatletter 
 \def \maxwidth{
@@ -43,7 +43,7 @@
 	\fi}
 \makeatother
 
-
+% ------- Служебные переменные для длины и ширины картинки ------- 
 \newlength\imageheight
 \newlength\imagewidth
 
@@ -65,7 +65,9 @@
 		\input{#2}
 		\begin{figure}[p!]
 			\centering
-			\includegraphics[height = 190mm, width = \linewidth, keepaspectratio]{#2}    %170 для того, чтобы вместилась надпись
+			\fbox{
+			\includegraphics[height = 181.5mm, width = 159.5mm, keepaspectratio]{#2}    %Прописал числами, а то что-расходятся все параметры
+			}
 			\settoheight\imageheight{\includegraphics{#2}}
 			\settowidth\imagewidth{\includegraphics{#2}}
 			\ifthenelse{\imagewidth > \imageheight}{\center #3}{}
