@@ -32,12 +32,12 @@
 
 
 % ------- Считаем оптимальную ширину картинки  -------
-% ------- По какой-то причине Gin@nat@width возвращает размер не пикселах
+% ------- Чтобы макрос работал как нужно, не должны быть указаны резолюшны. Долой жепеге!
 
 \makeatletter 
 \def \maxwidth{
-	\ifdim\Gin@nat@width>\linewidth
-		\linewidth
+	\ifdim\Gin@nat@width>159.5mm
+		159.5mm
 	\else
 		\Gin@nat@width
 	\fi}
@@ -66,7 +66,7 @@
 		\begin{figure}[p!]
 			\centering
 			\fbox{
-			\includegraphics[height = 181.5mm, width = 159.5mm, keepaspectratio]{#2}    %Прописал числами, а то что-расходятся все параметры
+			\includegraphics[height = 181.5mm, width = \maxwidth, keepaspectratio]{#2}    %Прописал числами, а то что-расходятся все параметры
 			}
 			\settoheight\imageheight{\includegraphics{#2}}
 			\settowidth\imagewidth{\includegraphics{#2}}
