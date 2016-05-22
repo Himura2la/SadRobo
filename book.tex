@@ -46,6 +46,8 @@
 % ------- Служебные переменные для длины и ширины картинки ------- 
 \newlength\imageheight
 \newlength\imagewidth
+\newcounter{vert}
+
 
 % ------- Робо-макросы ------- 
 
@@ -64,14 +66,20 @@
 	\chapter{Робот, которому грустно, и #2}
 		\input{#2}
 		\begin{figure}[p!]
-			\centering
-			\fbox{   %Эта фигня до теста, если её убрать, то картинка будет размером как рамка
-			\includegraphics[height = 181.5mm, width = \linewidth, keepaspectratio]{#2}    %Прописал числами, а то что-расходятся все параметры
-			}
 			\settoheight\imageheight{\includegraphics{#2}}
 			\settowidth\imagewidth{\includegraphics{#2}}
-			\ifthenelse{\imagewidth > \imageheight}{\center #3}{
-			\begin{sideways} #3 \end{sideways}} %Вертикальный текст
+			\ifthenelse{\imagewidth > \imageheight}{\setcounter{vert}{0}}{\setcounter{vert}{1}}
+			
+			
+			\ifthenelse{\value{vert} = 1}{\raggedleft}{\centering}
+					
+			\fbox{   %Эта фигня до теста, если её убрать, то картинка будет размером как рамка
+			\includegraphics[height = 181.5mm, width = \maxwidth, keepaspectratio]{#2}    %Прописал числами, а то что-расходятся все параметры
+			
+			}
+			
+			\ifthenelse{\value{vert} = 1}{}{\centering #3}
+			%\ifthenelse{\value{vert} = 1}{\raggedright \begin{sideways} \raggedleft#3 \end{sideways}}{}
 		\end{figure}
 	\setcounter{dianum}{#1}
 }
