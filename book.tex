@@ -70,7 +70,8 @@
 			}
 			\settoheight\imageheight{\includegraphics{#2}}
 			\settowidth\imagewidth{\includegraphics{#2}}
-			\ifthenelse{\imagewidth > \imageheight}{\center #3}{}
+			\ifthenelse{\imagewidth > \imageheight}{\center #3}{
+			\begin{sideways} #3 \end{sideways}} %Вертикальный текст
 		\end{figure}
 	\setcounter{dianum}{#1}
 }
