@@ -65,7 +65,8 @@
 \newcommand{\newdialog}[3]{
 	\chapter{Робот, которому грустно, и #2}
 		\input{#2}
-		\begin{figure}[p!]
+		%\begin{floatingfigure}[r]{159.5mm} 
+		\begin{figure}
 			\settoheight\imageheight{\includegraphics{#2}}
 			\settowidth\imagewidth{\includegraphics{#2}}
 			\ifthenelse{\imagewidth > \imageheight}{\setcounter{vert}{0}}{\setcounter{vert}{1}}
@@ -81,6 +82,7 @@
 			\ifthenelse{\value{vert} = 1}{}{\centering #3}
 			%\ifthenelse{\value{vert} = 1}{\raggedright \begin{sideways} \raggedleft#3 \end{sideways}}{}
 		\end{figure}
+		%\end{floatingfigure}
 	\setcounter{dianum}{#1}
 }
 
