@@ -1,10 +1,9 @@
+# -*- coding: utf=8 -*-
 import os
 import re
-import shutil
 
-dialogs_path = "..\\..\\dialogs"
-pictures_path = "..\\..\\pictures"
-texts_path = "..\\..\\texts"
+dialogs_path = "..\\..\\texts"
+marked_up_path = "..\\..\\texts\\marked_up"
 
 env_re_find = re.compile(r"(((^-|–).*\n)+)(\n*.*)\n*(((^-|–).*\n)+)", re.MULTILINE)
 env_re_replace = \
@@ -13,45 +12,29 @@ env_re_replace = \
 rep_re_find = re.compile(r'(^-|–)(.*?\n)((^-|–)(.*?\n))?', re.MULTILINE)
 rep_re_replace = r"\\X\2\\R\5"
 
+existing_dialogs = {}
 
-def process_dialog():
-    if title in existing_dialogs:
-        return
-    # number, title, txt_path, pic_path
-    text = open(txt_path, encoding="utf-8").read() + "\n"
+if not os.path.isdir(marked_up_path):
+    os.makedirs(marked_up_path)
+
+
+def process_dialog(title, text):
     text = re.sub(env_re_find, env_re_replace, text)
     text = re.sub(rep_re_find, rep_re_replace, text)
 
-    target_txt_path = os.path.join(texts_path, title + ".txt")
-    target_pic_path = os.path.join(pictures_path, title + "." + pic_path.split(".")[-1].lower())
+    target_txt_path = os.path.join(marked_up_path, title + ".tex")
 
     if True:  # Beware errors !!!
-        with open(target_txt_path, "w") as target:
+        with open(target_txt_path, "w", encoding='utf-8') as target:
             target.write(text)
-        # shutil.copy(pic_path, target_pic_path)
     else:
-        print("Copy " + pic_path + " --> " + target_pic_path)
         print("Write to " + target_txt_path + ":\n" + text + "\n" + "-"*80)
-    print("\\newdialog{%s}{%s}{Made in Python}{1}" % (number, title))
+        # print("\\newdialog{%s}{%s}{Made in Python}{1}" % (number, title))
 
 
-
-existing_pics = {file.split(".")[0] for file in os.listdir(pictures_path)}
-existing_texts = {file.split(".")[0] for file in os.listdir(texts_path)}
-existing_dialogs = existing_pics & existing_texts
-
-for folder in os.listdir(dialogs_path):
-    txt_path, pic_path = [None] * 2
-    number, title = folder.split(". ")
-    dialog_folder = os.path.join(dialogs_path, folder)
-    for file in os.listdir(dialog_folder):
-        extension = file.split(".")[-1].lower()
-        file_path = os.path.join(dialog_folder, file)
-        if extension == "txt":
-            txt_path = file_path
-        elif extension in {"png", "jpg"}:
-            pic_path = file_path
-    if txt_path is not None and pic_path is not None:
-        process_dialog()
-    else:
-        print("Inconsistent folder:", dialog_folder)
+for file in os.listdir(dialogs_path):
+    file_path = os.path.join(dialogs_path, file)
+    if os.path.isfile(file_path):
+        text = open(file_path, encoding="utf-8").read() + "\n"
+        if text.find("\\begin{") < 0:  # Not marked up
+            process_dialog(file.split('.')[0], text)
