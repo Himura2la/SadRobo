@@ -15,10 +15,6 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-lfs/Absolyutnoe_Dobro.png filter=lfs diff=lfs merge=lfs -text
-lfs/Absolyutnoe_Zlo.png filter=lfs diff=lfs merge=lfs -text
-lfs/Politikachb.png filter=lfs diff=lfs merge=lfs -text
-lfs/Shon_Bin.png filter=lfs diff=lfs merge=lfs -text
-lfs/*.jpg filter=lfs diff=lfs merge=lfs -text
+
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
