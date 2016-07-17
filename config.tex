@@ -85,4 +85,11 @@
 \checkandfixthelayout % just do it, memoir
 \renewcommand{\familydefault}{far} % Шрифт (tex\latex\pscyr\pscyr.sty)   % Подключаем чудо-шрифты из pscyr
 
-\usepackage{tabu}
+\usepackage{tabu} % Таблички для вертикальных надписей (верстаем таблицами, да)
+
+% Кошерное многоточие c http://kostyrka.ru/blog/archives/883 
+% Usage: Я хочу летать\ldotst{} Кто же этого не хочет\ldotsq{} Рассекать воздух "--- это так прекрасно\ldotse{}
+\def\ellipsiskern{.1em}
+\newcommand{\ldotst}{.\kern\ellipsiskern.\kern\ellipsiskern.}
+\newcommand{\ldotse}{!\kern\ellipsiskern.\kern\ellipsiskern.}
+\newcommand{\ldotsq}{?\kern\ellipsiskern\kern-.11em.\kern\ellipsiskern.}
