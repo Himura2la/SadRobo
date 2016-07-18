@@ -76,9 +76,9 @@
 			\end{figure}
 		}{
 			\begin{figure}  % Вертикальная картинка
-				\begin{tabu} to 1\textwidth { X[0.1,c,m] X[c,m] }
-				\rotatebox{90}{#3} &
-				\includegraphics[height=\textheight]{#2}
+				\begin{tabu} to 1\textwidth { X[c,m] X[0.1,c,m] }
+					\includegraphics[height=\textheight]{#2} &
+					\rotatebox{90}{#3}
 				\end{tabu}
 			\end{figure}
 		}
